@@ -1,43 +1,59 @@
-'use strict';
-const itemRow = document.querySelector('item__row');
-const footerInput = document.querySelector('footer__input');
-const inputValue = document.createTextNode(footerInput);
-const icoPlus = document.querySelector('ico-plus');
+"use strict";
 
+const items = document.querySelector(".items");
+const input = document.querySelector(".footer__input");
+const addBtn = document.querySelector(".footer__button");
 
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-    var itemRow = document.createElement("li");
-    var footerInput = document.querySelector("footer__input'").value;
-    var inputValue = document.createTextNode(footerInput);
-    li.appendChild(inputValue);
-    if (footerInput === '') {
-        alert("리스트를 입력해주세요");
-    } else {
-        document.querySelector("items").appendChild(li);
-    }
-    document.querySelector("footerInput").value = "";
+function onAdd() {
+  const text = input.value;
+  if (text === "") {
+    input.focus();
+    return;
+  }
 
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    li.appendChild(span);
+  const item = createItem();
 
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function () {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
+  items.appendChild(item);
+  item.scrollIntoView({ block: "end" });
+
+  input.value = "";
+  input.focus();
 }
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-        var div = this.parentElement;
-        div.style.display = "none";
-    }
+function createItem(text) {
+  const itemRow = document.createElement("li");
+  itemRow.setAttribute("class", "item__row");
+
+  const item = document.createElement("div");
+  item.setAttribute("class", "item");
+
+  const name = document.createElement("span");
+  name.setAttribute("class", "item__name");
+  name.innerText = text;
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("class", "item__delete");
+  deleteBtn.addEventListener("click", () => {
+    items.removeChild(itemRow);
+  });
+
+  const itemDivider = document.createElement("div");
+  itemDivider.setAttribute("class", "item__divider");
+
+  item.appendChild(name);
+  item.appendChild(deleteBtn);
+
+  itemRow.appendChild(item);
+  itemRow.appendChild(itemDivider);
+  return itemRow;
 }
+
+addBtn.addEventListener("click", () => {
+  onAdd();
+});
+
+input.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    onAdd();
+  }
+});

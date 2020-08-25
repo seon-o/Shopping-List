@@ -54,9 +54,20 @@ li {
 .item__row {
     display: flex;
     flex-direction: column;
-    margin: 10px 20px;
-    padding: 10px;
-    border-bottom: 1px solid rgba(155, 155, 155, 0.1);
+    margin: 5px 20px;
+    padding: 5px;
+}
+
+.item__row:first-of-type {
+    margin-top: 10px;
+}
+
+.item__divider {
+    margin: auto;
+    margin-top: 11px;
+    width: 100%;
+    height: 1px;
+    background: rgba(155, 155, 155, 0.1);
 }
 
 .item {
@@ -79,6 +90,11 @@ li {
     width: 30px;
     background: url(img/del.svg) bottom center;
     background-size: 100%;
+    transition: all 300ms ease-in;
+}
+
+.item__delete:hover {
+    transform: scale(1.1);
 }
 
 .footer {
@@ -110,7 +126,7 @@ input::placeholder {
     font-size: .9rem;
 }
 
-.ico-plus {
+.footer__button {
     margin: auto;
     width: 44px;
     height: 44px;
