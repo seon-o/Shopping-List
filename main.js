@@ -11,10 +11,12 @@ function onAdd() {
     return;
   }
 
-  const item = createItem();
+  const item = createItem(text);
 
   items.appendChild(item);
-  item.scrollIntoView({ block: "end" });
+  item.scrollIntoView({
+    block: "end"
+  });
 
   input.value = "";
   input.focus();
